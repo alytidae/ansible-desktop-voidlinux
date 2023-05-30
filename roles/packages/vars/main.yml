@@ -1,0 +1,37 @@
+---
+free_packages:
+  - vim
+  - htop
+  - neofetch
+  - neovim
+  - wayland
+  - sway
+  - swaylock
+  - Waybar
+  - zsh
+  - alacritty
+  - anki 
+  - telegram-desktop
+  - Thunar
+  - vscode
+  - mpv
+  - qbittorrent
+  - wget
+  - syncthing
+  - brightnessctl
+  - pipewire
+  - connman
+
+non_free_packages:
+  - obsidian
+  - google-chrome
+  - spotify
+
+non_free_packages_flatpak_id:
+  - md.obsidian.Obsidian
+  - com.google.Chrome
+  - com.spotify.Client
+
+cargo:
+  - yofi
+

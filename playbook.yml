@@ -1,0 +1,5 @@
+---
+- hosts: machine
+  become: yes
+  roles:
+    - packages
