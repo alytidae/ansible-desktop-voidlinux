@@ -1,0 +1,48 @@
+---
+
+- name: Upgrade all packages
+  package:
+    update_cache: true
+    upgrade: true
+
+- name: Install free-packages
+  package:
+      name: "{{ item }}"
+      state: present
+  with_items: "{{ free_packages }}"
+
+- block:
+  - name: Install flatpak for non_free_packages
+    package:
+      name: flatpak 
+      state: present
+
+  - name: Add flathub repo
+    flatpak_remote:
+      name: flathub
+      state: present
+      flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+      method: user
+
+  - name: Install non_free_packages (Void, flatpak)
+    flatpak:
+      name: "{{ item }}"
+      state: present
+      method: user
+    with_items: "{{ non_free_packages_flatpak_id }}"
+    become: no
+  when: ansible_os_family == "Void"
+
+- block:
+  - name: Install yum for non_free_packages 
+    package: 
+      name: yum
+      state: present 
+
+  - name: Install non_free_packages (Arch, yum)
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items: "{{ non_free_packages }}"
+  when: ansible_os_family == "Archlinux"
+
