@@ -21,6 +21,7 @@ free_packages:
   - brightnessctl
   - pipewire
   - connman
+  - pass
 
 non_free_packages:
   - obsidian
