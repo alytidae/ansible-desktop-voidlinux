@@ -1,7 +1,9 @@
 ---
 
-username        : "igor"
+# Change here to a more preferred name
+username        : "ansuser"
 
+# Change here to a more complex password 
 password        : "password"
 
 locale          : "en-us.UTF-8"
