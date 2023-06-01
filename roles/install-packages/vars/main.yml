@@ -22,6 +22,7 @@ free_packages:
   - pipewire
   - connman
   - pass
+  - lazygit 
 
 non_free_packages:
   - obsidian
