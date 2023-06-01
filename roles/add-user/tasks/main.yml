@@ -1,0 +1,11 @@
+---
+
+- name: Add new user "{{ username }}"
+  user:
+    name: "{{ username }}"
+    password: "{{ password | password_hash('sha512')}}"
+    shell: /bin/bash
+    groups: wheel, audio, video
+    append: yes
+    create_home: true
+
