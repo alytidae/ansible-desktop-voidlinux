@@ -1,2 +1,2 @@
 [machine]
-localhost:2022 ansible_ssh_user=root
+localhost ansible_ssh_user=root
