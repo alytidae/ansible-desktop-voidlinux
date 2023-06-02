@@ -7,11 +7,12 @@
 
 - name: Install free-packages
   package:
-      name: "{{ item }}"
-      state: present
-  with_items: "{{ free_packages }}"
+    name: "{{ item }}"
+    state: present
+    with_items: "{{ free_packages }}"
 
 - block:
+
   - name: Install flatpak for non_free_packages
     package:
       name: flatpak 
@@ -23,6 +24,8 @@
       state: present
       flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
       method: user
+    become: no
+    become_user: "{{ username }}"
 
   - name: Install non_free_packages (Void, flatpak)
     flatpak:
@@ -31,9 +34,12 @@
       method: user
     with_items: "{{ non_free_packages_flatpak_id }}"
     become: no
+    become_user: "{{ username }}"
+
   when: ansible_os_family == "Void"
 
 - block:
+
   - name: Install yum for non_free_packages 
     package: 
       name: yum
@@ -44,5 +50,6 @@
       name: "{{ item }}"
       state: present
     with_items: "{{ non_free_packages }}"
+
   when: ansible_os_family == "Archlinux"
 

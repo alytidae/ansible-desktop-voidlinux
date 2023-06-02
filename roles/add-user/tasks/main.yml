@@ -9,3 +9,4 @@
     append: yes
     create_home: true
 
+      #- name: Add "{{ username }}" to sudoers
