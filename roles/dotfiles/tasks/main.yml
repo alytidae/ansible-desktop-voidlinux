@@ -1,0 +1,6 @@
+---
+
+- name: Clone dotfile repository
+  git:
+    repo: "{{dotfile_repo}}"
+    dest: "/home/{{username}}/ws/dotfiles"
