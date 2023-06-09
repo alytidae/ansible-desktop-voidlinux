@@ -9,4 +9,10 @@
     append: yes
     create_home: true
 
-      #- name: Add "{{ username }}" to sudoers
+- name: Allow 'wheel' group to have password sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL:ALL) ALL'
+    validate: 'visudo -cf %s' 
