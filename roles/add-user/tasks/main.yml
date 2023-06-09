@@ -13,6 +13,6 @@
   lineinfile:
     dest: /etc/sudoers
     state: present
-    regexp: '^%wheel'
+    regexp: '^# %wheel ALL=\(ALL:ALL\) ALL'
     line: '%wheel ALL=(ALL:ALL) ALL'
     validate: 'visudo -cf %s' 
