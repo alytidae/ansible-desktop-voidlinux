@@ -4,6 +4,7 @@
   user:
     name: "{{ username }}"
     password: "{{ password | password_hash('sha512')}}"
+    update_password: on_create
     shell: /bin/bash
     groups: wheel, audio, video
     append: yes
