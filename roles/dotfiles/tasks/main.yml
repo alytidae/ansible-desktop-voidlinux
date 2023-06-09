@@ -2,5 +2,12 @@
 
 - name: Clone dotfile repository
   git:
-    repo: "{{dotfile_repo}}"
-    dest: "/home/{{username}}/ws/dotfiles"
+    repo: "{{ dotfile_repo }}"
+    dest: "/home/{{ username }}/ws/dotfiles"
+
+- name: Link dotfile folders to .config
+  file:
+    src:  "/home/{{ username }}/ws/dotfiles/{{ item }}"
+    dest: "/home/{{ username }}/.config/{{ item }}"
+    state: link
+  with_items: "{{ dotfiles_folders }}"
