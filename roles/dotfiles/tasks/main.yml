@@ -18,3 +18,10 @@
     dest: "/home/{{ username }}/.local/share/fonts"
     state: link
 
+- name: Add .zprofile to home
+  file:
+    src: "/home/{{ username }}/ws/dotfiles/other/.zprofile"
+    dest: "/home/{{ username }}/.zprofile"
+    state: link
+
+
