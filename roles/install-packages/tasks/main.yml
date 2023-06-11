@@ -24,7 +24,7 @@
       state: present
       flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
       method: user
-    become: no
+    become: yes
     become_user: "{{ username }}"
 
   - name: Install non_free_packages (Void, flatpak)
@@ -33,7 +33,7 @@
       state: present
       method: user
     with_items: "{{ non_free_packages_flatpak_id }}"
-    become: no
+    become: yes
     become_user: "{{ username }}"
 
   when: ansible_os_family == "Void"

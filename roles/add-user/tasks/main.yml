@@ -4,7 +4,8 @@
   user:
     name: "{{ username }}"
     password: "{{ password | password_hash('sha512')}}"
-    shell: /bin/bash
+    update_password: on_create
+    shell: /bin/sh
     groups: wheel, audio, video
     append: yes
     create_home: true
@@ -13,6 +14,19 @@
   lineinfile:
     dest: /etc/sudoers
     state: present
-    regexp: '^%wheel'
+    regexp: '^# %wheel ALL=\(ALL:ALL\) ALL'
     line: '%wheel ALL=(ALL:ALL) ALL'
     validate: 'visudo -cf %s' 
+
+- name: Create the main directories in /home
+  file: 
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+  loop: 
+    - "/home/{{ username }}/ws"         # workspaces are used for cloning repositories
+    - "/home/{{ username }}/prom"       # programming are used for code projects
+    - "/home/{{ username }}/docs"       # documents are used for other stuff
+    - "/home/{{ username }}/.config"

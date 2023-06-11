@@ -1,0 +1,29 @@
+---
+
+- name: Clone dotfile repository
+  git:
+    repo: "{{ dotfile_repo }}"
+    dest: "/home/{{ username }}/ws/dotfiles"
+  become: yes
+  become_user: "{{ username }}"
+
+- name: Link dotfile apps to .config
+  file:
+    src:  "/home/{{ username }}/ws/dotfiles/{{ item }}"
+    dest: "/home/{{ username }}/.config/{{ item }}"
+    state: link
+  with_items: "{{ dotfiles_apps }}"
+
+- name: Link dotfile fonts to .local/share/fonts
+  file:
+    src: "/home/{{ username }}/ws/dotfiles/other/fonts"
+    dest: "/home/{{ username }}/.local/share/fonts"
+    state: link
+
+- name: Add .zprofile to home
+  file:
+    src: "/home/{{ username }}/ws/dotfiles/other/.zprofile"
+    dest: "/home/{{ username }}/.zprofile"
+    state: link
+
+

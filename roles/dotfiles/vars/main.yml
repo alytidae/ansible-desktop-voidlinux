@@ -1,0 +1,9 @@
+dotfile_repo : "https://github.com/alytidae/dotfiles.git"
+
+dotfiles_apps:
+  - alacritty
+  - nvim
+  - sway
+  - swaylock
+  - waybar
+  - zsh
