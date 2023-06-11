@@ -10,4 +10,4 @@
     src:  "/home/{{ username }}/ws/dotfiles/{{ item }}"
     dest: "/home/{{ username }}/.config/{{ item }}"
     state: link
-  with_items: "{{ dotfiles_folders }}"
+  with_items: "{{ dotfiles_apps }}"
