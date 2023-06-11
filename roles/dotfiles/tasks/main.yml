@@ -4,6 +4,8 @@
   git:
     repo: "{{ dotfile_repo }}"
     dest: "/home/{{ username }}/ws/dotfiles"
+  become: yes
+  become_user: "{{ username }}"
 
 - name: Link dotfile apps to .config
   file:
