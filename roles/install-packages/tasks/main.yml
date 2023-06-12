@@ -11,6 +11,7 @@
     state: present
   with_items: "{{ free_packages }}"
 
+# TODO: Remove flatpak and install this packages with xbps-src(*.deb and *.rpm)
 - name: Install flatpak for non_free_packages
   package:
     name: flatpak 
