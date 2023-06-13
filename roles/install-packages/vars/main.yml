@@ -4,10 +4,6 @@ free_packages:
   - htop
   - neofetch
   - neovim
-  - wayland
-  - sway
-  - swaylock
-  - Waybar
   - zsh
   - alacritty
   - anki 
@@ -23,6 +19,20 @@ free_packages:
   - connman
   - pass
   - lazygit 
+  # SWAY
+  # Troubles:
+  # https://www.reddit.com/r/voidlinux/comments/hgm4ig/void_sway_troubleshooting_reminder/
+  # https://www.reddit.com/r/voidlinux/comments/nab764/sway_not_working/
+  # https://github.com/swaywm/sway/wiki/Running-Sway-without-systemd
+  # https://docs.voidlinux.org/config/graphical-session/graphics-drivers/index.html
+  - dbus-elogind
+  - polkit
+  - elogind
+  - mesa-dri
+  - wayland
+  - sway
+  - swaylock
+  - Waybar
 
 non_free_packages:
   - obsidian
