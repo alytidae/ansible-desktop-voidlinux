@@ -29,6 +29,8 @@ free_packages:
   - polkit
   - elogind
   - mesa-dri
+  - xorg-fonts
+  - gvfs
   - wayland
   - sway
   - swaylock
