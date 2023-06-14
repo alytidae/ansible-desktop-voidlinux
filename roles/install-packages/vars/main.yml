@@ -2,6 +2,7 @@
 free_packages:
   - vim
   - htop
+  - curl
   - neofetch
   - neovim
   - zsh
