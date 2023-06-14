@@ -12,25 +12,25 @@
   with_items: "{{ free_packages }}"
 
 # TODO: Remove flatpak and install this packages with xbps-src(*.deb and *.rpm)
-- name: Install flatpak for non_free_packages
-  package:
-    name: flatpak 
-    state: present
-
-- name: Add flathub repo
-  flatpak_remote:
-    name: flathub
-    state: present
-    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-    method: user
-  become: yes
-  become_user: "{{ username }}"
-
-- name: Install non_free_packages (Void, flatpak)
-  flatpak:
-    name: "{{ item }}"
-    state: present
-    method: user
-  with_items: "{{ non_free_packages_flatpak_id }}"
-  become: yes
-  become_user: "{{ username }}"
+#- name: Install flatpak for non_free_packages
+#  package:
+#    name: flatpak 
+#    state: present
+#
+#- name: Add flathub repo
+#  flatpak_remote:
+#    name: flathub
+#    state: present
+#    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+#    method: user
+#  become: yes
+#  become_user: "{{ username }}"
+#
+#- name: Install non_free_packages (Void, flatpak)
+#  flatpak:
+#    name: "{{ item }}"
+#    state: present
+#    method: user
+#  with_items: "{{ non_free_packages_flatpak_id }}"
+#  become: yes
+#  become_user: "{{ username }}"
