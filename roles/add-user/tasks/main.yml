@@ -29,3 +29,4 @@
     - "/home/{{ username }}/prom"       # programming are used for code projects
     - "/home/{{ username }}/docs"       # documents are used for other stuff
     - "/home/{{ username }}/.config"
+    - "/home/{{ username }}/.local/share"
