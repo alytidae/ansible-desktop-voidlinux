@@ -5,6 +5,15 @@
     name: "{{ username }}"
     shell: /bin/zsh
 
+- name: Delete .bash files in home directory
+  file:
+    path: "/home/{{ username }}/{{ item }}"
+    state: absent
+  with_items:
+    - ".bashrc"
+    - ".bash_logout"
+    - ".bash_profile"
+
 # sway
 - name: Enable dbus
   service: 
