@@ -1,5 +1,4 @@
 ---
-
 - name: Upgrade all packages
   package:
     update_cache: true
@@ -10,6 +9,36 @@
     name: "{{ item }}"
     state: present
   with_items: "{{ free_packages }}"
+
+- name: Check if rustup is installed
+  stat:
+    path: "/home/{{ username }}/ws/.rustup"
+  register: rustup_folder
+
+- name: Update rustup
+  shell: "rustup update"
+  environment:
+    PATH: "/home/{{ username }}/ws/.cargo/bin"
+  when: rustup_folder.stat.exists
+
+- name: Download Installer
+  get_url:
+    url: https://sh.rustup.rs
+    dest: "/tmp/sh.rustup.rs"
+    mode: '0755'
+    force: 'yes'
+  become: yes
+  become_user: "{{ username }}"
+  when: not rustup_folder.stat.exists
+
+- name: Install rustup
+  shell: "/tmp/sh.rustup.rs -y"
+  environment:
+    CARGO_HOME:  "/home/{{ username }}/ws/.cargo"
+    RUSTUP_HOME: "/home/{{ username }}/ws/.rustup"
+  become: yes
+  become_user: "{{ username }}"
+  when: not rustup_folder.stat.exists
 
 # TODO: Remove flatpak and install this packages with xbps-src(*.deb and *.rpm)
 #- name: Install flatpak for non_free_packages
