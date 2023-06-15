@@ -5,7 +5,6 @@
     name: "{{ username }}"
     password: "{{ password | password_hash('sha512')}}"
     update_password: on_create
-    shell: /bin/sh
     groups: wheel, audio, video
     append: yes
     create_home: true
@@ -30,3 +29,4 @@
     - "/home/{{ username }}/prom"       # programming are used for code projects
     - "/home/{{ username }}/docs"       # documents are used for other stuff
     - "/home/{{ username }}/.config"
+    - "/home/{{ username }}/.local/share"

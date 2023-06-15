@@ -1,6 +1,0 @@
----
-
-- name: Change user shell to zsh
-  user:
-    name: "{{ username }}"
-    shell: /bin/zsh
