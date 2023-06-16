@@ -19,6 +19,10 @@
   shell: "rustup update"
   environment:
     PATH: "/home/{{ username }}/ws/.cargo/bin"
+    CARGO_HOME:  "/home/{{ username }}/ws/.cargo"
+    RUSTUP_HOME: "/home/{{ username }}/ws/.rustup"
+  become: yes
+  become_user: "{{ username }}"
   when: rustup_folder.stat.exists
 
 - name: Download Installer
@@ -40,6 +44,68 @@
   become_user: "{{ username }}"
   when: not rustup_folder.stat.exists
 
+- name: FUCK THIS SHIT 
+  shell: rustup default stable
+  environment:
+    PATH: "/home/{{ username }}/ws/.cargo/bin"
+    CARGO_HOME:  "/home/{{ username }}/ws/.cargo"
+    RUSTUP_HOME: "/home/{{ username }}/ws/.rustup"
+  become: yes
+  become_user: "{{ username }}"
+  when: not rustup_folder.stat.exists
+
+- name: Rust package its latest version
+  community.general.cargo:
+    name: "{{ item }}"
+    state: latest
+  environment:
+    PATH: "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/home/{{ username }}/ws/.cargo/bin"
+    CARGO_HOME:  "/home/{{ username }}/ws/.cargo"
+    RUSTUP_HOME: "/home/{{ username }}/ws/.rustup"
+  become: yes
+  become_user: "{{ username }}"
+  with_items: "{{ cargo_packages }}"
+
+#- name: Create link .cargo
+#  file:
+#    src: "/home/{{ username }}/ws/.cargo"
+#    dest: "/home/{{ username }}/.cargo"
+#    state: link
+#
+#- name: Create link .rustup
+#  file:
+#    src: "/home/{{ username }}/ws/.rustup"
+#    dest: "/home/{{ username }}/.rustup"
+#    state: link
+
+      #- name: test1
+      #  shell: rustup show
+      #  become: yes
+      #  become_user: "{{ username }}"
+      #  environment:
+      #    PATH: "/home/{{ username }}/ws/.cargo/bin"
+      #    CARGO_HOME:  "/home/{{ username }}/ws/.cargo"
+      #    RUSTUP_HOME: "/home/{{ username }}/ws/.rustup"
+      #  register: test
+      #
+      #- name: test2
+      #  debug:
+      #    msg: "{{ test }}"
+
+
+
+#- name: Install cargo packages
+#  community.general.cargo:
+#    name: "{{ item }}"
+#    state: latest
+#  environment:
+#    PATH: "/home/{{ username }}/ws/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin"
+#    CARGO_HOME:  "/home/{{ username }}/ws/.cargo"
+#    RUSTUP_HOME: "/home/{{ username }}/ws/.rustup"
+#  become: yes
+#  become_user: "{{ username }}"
+#  with_items: "{{ cargo }}"
+    
 # TODO: Remove flatpak and install this packages with xbps-src(*.deb and *.rpm)
 #- name: Install flatpak for non_free_packages
 #  package:
