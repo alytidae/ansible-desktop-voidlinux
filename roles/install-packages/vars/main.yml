@@ -1,5 +1,8 @@
 ---
 free_packages:
+  - base-devel
+  - clang
+  - fontconfig-devel
   - vim
   - htop
   - curl
@@ -47,6 +50,6 @@ non_free_packages_flatpak_id:
   - com.google.Chrome
   - com.spotify.Client
 
-cargo:
+cargo_packages:
   - yofi
 
