@@ -33,11 +33,11 @@
       shell: "/tmp/sh.rustup.rs -y"
       when: not rustup_folder.stat.exists
     
-    - name: FUCK THIS SHIT 
+    - name: Specifying the rust version (default stable)
       shell: rustup default stable
       when: not rustup_folder.stat.exists
     
-    - name: Rust package its latest version
+    - name: Installing cargo packages
       community.general.cargo:
         name: "{{ item }}"
         state: latest
