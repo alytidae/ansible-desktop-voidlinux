@@ -15,6 +15,7 @@ free_packages:
   - Thunar
   - vscode
   - mpv
+  - imv
   - qbittorrent
   - wget
   - syncthing
