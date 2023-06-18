@@ -1,11 +1,15 @@
 ---
 free_packages:
+  # BASE
   - base-devel
   - clang
   - fontconfig-devel
+  - xtools
+  # APPS
   - vim
   - htop
   - curl
+  - git
   - neofetch
   - neovim
   - zsh
@@ -42,14 +46,11 @@ free_packages:
   - Waybar
 
 non_free_packages:
-  - obsidian
   - google-chrome
   - spotify
-
-non_free_packages_flatpak_id:
-  - md.obsidian.Obsidian
-  - com.google.Chrome
-  - com.spotify.Client
+  # The last package I need is "Obsidian", but it is not in the voidlinux repositories. Why?
+  # Because: https://github.com/void-linux/void-packages/issues/38348
+  # How to fix without flatpak: https://github.com/toluschr/xdeb
 
 cargo_packages:
   - yofi
