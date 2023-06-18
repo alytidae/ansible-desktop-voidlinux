@@ -65,18 +65,18 @@
       command: "/home/{{ username }}/ws/void-packages/xbps-src binary-bootstrap"
       become_user: "{{ username }}"
     
-    - name: etc
+    - name: Enabling 'restricted' packages
       copy:
         dest: "/home/{{ username }}/ws/void-packages/etc/conf"
         content: |
           XBPS_ALLOW_RESTRICTED=yes
       become_user: "{{ username }}"
     
-    - name: Installing the bootstrap packages
+    - name: Building the non-free-packages 
       command: "/home/{{ username }}/ws/void-packages/xbps-src pkg {{ item }}"
       become_user: "{{ username }}"
-      with_items: "{{ non-free-packages }}"
+      with_items: "{{ non_free_packages }}"
     
-    - name: Install google
+    - name: Installing the non-free-packages 
       shell: "xbps-install --repository=/home/{{ username }}/ws/void-packages/hostdir/binpkgs/nonfree -y {{ item }}"
-      with_items: "{{ non-free-packages }}"
+      with_items: "{{ non_free_packages }}"
