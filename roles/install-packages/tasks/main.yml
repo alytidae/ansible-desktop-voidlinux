@@ -1,144 +1,82 @@
 ---
-#- name: Upgrade all packages
-#  package:
-#    update_cache: true
-#    upgrade: true
-#
-#- name: Install free-packages
-#  package:
-#    name: "{{ item }}"
-#    state: present
-#  with_items: "{{ free_packages }}"
-#
-#- name: Installing/updating rustup toolchain and cargo packages
-#  block:
-#    - name: Check if rustup is installed
-#      stat:
-#        path: "/home/{{ username }}/ws/.rustup"
-#      register: rustup_folder
-#    
-#    - name: Update rustup
-#      shell: "rustup update"
-#      when: rustup_folder.stat.exists
-#    
-#    - name: Download Installer
-#      get_url:
-#        url: https://sh.rustup.rs
-#        dest: "/tmp/sh.rustup.rs"
-#        mode: '0755'
-#        force: 'yes'
-#      when: not rustup_folder.stat.exists
-#    
-#    - name: Install rustup
-#      shell: "/tmp/sh.rustup.rs -y"
-#      when: not rustup_folder.stat.exists
-#    
-#    - name: Specifying the rust version (default stable)
-#      shell: rustup default stable
-#      when: not rustup_folder.stat.exists
-#    
-#    - name: Installing cargo packages
-#      community.general.cargo:
-#        name: "{{ item }}"
-#        state: latest
-#      with_items: "{{ cargo_packages }}"
-#  environment:
-#    #I know that maybe this is not the best way to add .cargo/bin to the PATH, but I couldn't figure out how to do it
-#    PATH: "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/home/{{ username }}/ws/.cargo/bin"
-#    # Since I keep mine .cargo and .rustup in the "ws" folder I have to specify this in ansible. I also have exports in dotfiles/zsh/.zshrc
-#    CARGO_HOME:  "/home/{{ username }}/ws/.cargo"
-#    RUSTUP_HOME: "/home/{{ username }}/ws/.rustup"
-#  become: yes
-#  become_user: "{{ username }}"
+- name: Upgrade all packages
+  package:
+    update_cache: true
+    upgrade: true
 
-#- name: Installing non-free packages
-#  block:
-#- name: Cloning void-linux/void-packages.git for non-free packages (>700Mb, you need to wait)
-#  git:
-#    repo: https://github.com/void-linux/void-packages.git
-#    dest: "/home/{{ username }}/ws/void-packages"
-#    force: yes
-#  become: yes
-#  become_user: "{{ username }}"
+- name: Install free-packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ free_packages }}"
 
-- name: Installing the bootstrap packages
-  command: "/home/{{ username }}/ws/void-packages/xbps-src binary-bootstrap"
-  become_user: "{{ username }}"
-
-- name: etc
-  copy:
-    dest: "/home/{{ username }}/ws/void-packages/etc/conf"
-    content: |
-      XBPS_ALLOW_RESTRICTED=yes
-  become_user: "{{ username }}"
-
-- name: Installing the bootstrap packages
-  command: "/home/{{ username }}/ws/void-packages/xbps-src pkg google-chrome"
-  become_user: "{{ username }}"
-
-- name: Install google
-  shell: "xbps-install --repository=/home/{{ username }}/ws/void-packages/hostdir/binpkgs/nonfree -y google-chrome"
-  
-#- name: Create link .cargo
-#  file:
-#    src: "/home/{{ username }}/ws/.cargo"
-#    dest: "/home/{{ username }}/.cargo"
-#    state: link
-#
-#- name: Create link .rustup
-#  file:
-#    src: "/home/{{ username }}/ws/.rustup"
-#    dest: "/home/{{ username }}/.rustup"
-#    state: link
-
-      #- name: test1
-      #  shell: rustup show
-      #  become: yes
-      #  become_user: "{{ username }}"
-      #  environment:
-      #    PATH: "/home/{{ username }}/ws/.cargo/bin"
-      #    CARGO_HOME:  "/home/{{ username }}/ws/.cargo"
-      #    RUSTUP_HOME: "/home/{{ username }}/ws/.rustup"
-      #  register: test
-      #
-      #- name: test2
-      #  debug:
-      #    msg: "{{ test }}"
-
-
-
-#- name: Install cargo packages
-#  community.general.cargo:
-#    name: "{{ item }}"
-#    state: latest
-#  environment:
-#    PATH: "/home/{{ username }}/ws/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin"
-#    CARGO_HOME:  "/home/{{ username }}/ws/.cargo"
-#    RUSTUP_HOME: "/home/{{ username }}/ws/.rustup"
-#  become: yes
-#  become_user: "{{ username }}"
-#  with_items: "{{ cargo }}"
+- name: Installing/updating rustup toolchain and cargo packages
+  block:
+    - name: Check if rustup is installed
+      stat:
+        path: "/home/{{ username }}/ws/.rustup"
+      register: rustup_folder
     
-# TODO: Remove flatpak and install this packages with xbps-src(*.deb and *.rpm)
-#- name: Install flatpak for non_free_packages
-#  package:
-#    name: flatpak 
-#    state: present
-#
-#- name: Add flathub repo
-#  flatpak_remote:
-#    name: flathub
-#    state: present
-#    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-#    method: user
-#  become: yes
-#  become_user: "{{ username }}"
-#
-#- name: Install non_free_packages (Void, flatpak)
-#  flatpak:
-#    name: "{{ item }}"
-#    state: present
-#    method: user
-#  with_items: "{{ non_free_packages_flatpak_id }}"
-#  become: yes
-#  become_user: "{{ username }}"
+    - name: Update rustup
+      shell: "rustup update"
+      when: rustup_folder.stat.exists
+    
+    - name: Download Installer
+      get_url:
+        url: https://sh.rustup.rs
+        dest: "/tmp/sh.rustup.rs"
+        mode: '0755'
+        force: 'yes'
+      when: not rustup_folder.stat.exists
+    
+    - name: Install rustup
+      shell: "/tmp/sh.rustup.rs -y"
+      when: not rustup_folder.stat.exists
+    
+    - name: Specifying the rust version (default stable)
+      shell: rustup default stable
+      when: not rustup_folder.stat.exists
+    
+    - name: Installing cargo packages
+      community.general.cargo:
+        name: "{{ item }}"
+        state: latest
+      with_items: "{{ cargo_packages }}"
+  environment:
+    #I know that maybe this is not the best way to add .cargo/bin to the PATH, but I couldn't figure out how to do it
+    PATH: "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/home/{{ username }}/ws/.cargo/bin"
+    # Since I keep mine .cargo and .rustup in the "ws" folder I have to specify this in ansible. I also have exports in dotfiles/zsh/.zshrc
+    CARGO_HOME:  "/home/{{ username }}/ws/.cargo"
+    RUSTUP_HOME: "/home/{{ username }}/ws/.rustup"
+  become: yes
+  become_user: "{{ username }}"
+
+- name: Installing non-free packages
+  block:
+    - name: Cloning void-linux/void-packages.git for non-free packages (>700Mb, you need to wait)
+      git:
+        repo: https://github.com/void-linux/void-packages.git
+        dest: "/home/{{ username }}/ws/void-packages"
+        force: yes
+      become: yes
+      become_user: "{{ username }}"
+    
+    - name: Installing the bootstrap packages
+      command: "/home/{{ username }}/ws/void-packages/xbps-src binary-bootstrap"
+      become_user: "{{ username }}"
+    
+    - name: etc
+      copy:
+        dest: "/home/{{ username }}/ws/void-packages/etc/conf"
+        content: |
+          XBPS_ALLOW_RESTRICTED=yes
+      become_user: "{{ username }}"
+    
+    - name: Installing the bootstrap packages
+      command: "/home/{{ username }}/ws/void-packages/xbps-src pkg {{ item }}"
+      become_user: "{{ username }}"
+      with_items: "{{ non-free-packages }}"
+    
+    - name: Install google
+      shell: "xbps-install --repository=/home/{{ username }}/ws/void-packages/hostdir/binpkgs/nonfree -y {{ item }}"
+      with_items: "{{ non-free-packages }}"
