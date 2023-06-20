@@ -18,14 +18,14 @@
     - ".bash_logout"
     - ".bash_profile"
 
-# sway
-- name: Enable dbus
-  service: 
-    name: dbus
-    enabled: yes
-
-- name: Enable polkit
-  service: 
-    name: polkitd
-    enabled: yes
-# sway
+- name: Enabling services for sway
+  block:
+    - name: Enable dbus
+      service: 
+        name: dbus
+        enabled: yes
+    
+    - name: Enable polkit
+      service: 
+        name: polkitd
+        enabled: yes
