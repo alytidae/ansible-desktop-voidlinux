@@ -5,6 +5,10 @@
     name: "{{ username }}"
     shell: /bin/zsh
 
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"
+
 - name: Delete .bash files in home directory
   file:
     path: "/home/{{ username }}/{{ item }}"
