@@ -1,10 +1,11 @@
 ---
 
-username        : "ansuser"
+username: "ansuser"
 
-hostname        : "void-vm"
+hostname: "void-vm"
 
 # Change here to a MORE complex password 
-password        : "password"
+password: "password"
 
-locale          : "en-us.UTF-8"
+locale: 
+  - "en-us.UTF-8"
