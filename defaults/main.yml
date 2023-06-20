@@ -8,4 +8,4 @@ hostname: "void-vm"
 password: "password"
 
 locale: 
-  - "en-us.UTF-8"
+  - "en_US.UTF-8 UTF-8"

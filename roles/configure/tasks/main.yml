@@ -9,6 +9,18 @@
   ansible.builtin.hostname:
     name: "{{ hostname }}"
 
+- name: Locales
+  block:
+    - name: Adding locales in /etc/default/libc-locales
+      lineinfile:
+        path: /etc/default/libc-locales
+        regexp: "#{{ item }}"
+        line: "{{ item }}" 
+      with_items: "{{ locale }}"
+
+    - name: force-reconfigure the glibc-locales package
+      command: "xbps-reconfigure -fa"
+
 - name: Delete .bash files in home directory
   file:
     path: "/home/{{ username }}/{{ item }}"
