@@ -1,8 +1,8 @@
 ---
 free_packages:
   # BASE
-  - base-devel
   - clang
+  - base-devel
   - fontconfig-devel
   - xtools
   # APPS
@@ -41,8 +41,7 @@ free_packages:
   - xorg-fonts
   - gvfs
   - wayland
-  - sway
-  - swayfx
+  - swayfx # Replacement for sway
   - swaylock
   - Waybar
 
