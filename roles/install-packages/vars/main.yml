@@ -42,6 +42,7 @@ free_packages:
   - gvfs
   - wayland
   - sway
+  - swayfx
   - swaylock
   - Waybar
 
