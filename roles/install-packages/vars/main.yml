@@ -10,6 +10,7 @@ free_packages:
   - htop
   - curl
   - git
+  - tree
   - neofetch
   - neovim
   - zsh
@@ -28,6 +29,8 @@ free_packages:
   - connman
   - pass
   - lazygit 
+  - firefox
+  - thunderbird
   # SWAY
   # Troubles:
   # https://www.reddit.com/r/voidlinux/comments/hgm4ig/void_sway_troubleshooting_reminder/
@@ -41,17 +44,9 @@ free_packages:
   - xorg-fonts
   - gvfs
   - wayland
-  - swayfx # Replacement for sway
+  - sway
   - swaylock
   - Waybar
 
 non_free_packages:
-  - google-chrome
-  - spotify
-  # The last package I need is "Obsidian", but it is not in the voidlinux repositories. Why?
-  # Because: https://github.com/void-linux/void-packages/issues/38348
-  # How to fix without flatpak: https://github.com/toluschr/xdeb
-
-cargo_packages:
-  - yofi
-
+  # - spotify
