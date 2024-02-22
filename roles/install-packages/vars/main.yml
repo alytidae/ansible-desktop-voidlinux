@@ -50,4 +50,4 @@ free_packages:
   - Waybar
 
 non_free_packages:
-  # - spotify
+  - spotify

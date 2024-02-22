@@ -51,32 +51,32 @@
 #   become: yes
 #   become_user: "{{ username }}"
 
-# - name: Installing non-free packages
-#   block:
-#     - name: Cloning void-linux/void-packages.git for non-free packages (>700Mb, you need to wait)
-#       git:
-#         repo: https://github.com/void-linux/void-packages.git
-#         dest: "/home/{{ username }}/ws/void-packages"
-#         force: yes
-#       become: yes
-#       become_user: "{{ username }}"
+- name: Installing non-free packages
+  block:
+    - name: Cloning void-linux/void-packages.git for non-free packages (>700Mb, you need to wait)
+      git:
+        repo: https://github.com/void-linux/void-packages.git
+        dest: "/home/{{ username }}/ws/void-packages"
+        force: yes
+      become: yes
+      become_user: "{{ username }}"
     
-#     - name: Installing the bootstrap packages
-#       command: "/home/{{ username }}/ws/void-packages/xbps-src binary-bootstrap"
-#       become_user: "{{ username }}"
+    - name: Installing the bootstrap packages
+      command: "/home/{{ username }}/ws/void-packages/xbps-src binary-bootstrap"
+      become_user: "{{ username }}"
     
-#     - name: Enabling 'restricted' packages
-#       copy:
-#         dest: "/home/{{ username }}/ws/void-packages/etc/conf"
-#         content: |
-#           XBPS_ALLOW_RESTRICTED=yes
-#       become_user: "{{ username }}"
+    - name: Enabling 'restricted' packages
+      copy:
+        dest: "/home/{{ username }}/ws/void-packages/etc/conf"
+        content: |
+          XBPS_ALLOW_RESTRICTED=yes
+      become_user: "{{ username }}"
     
-#     - name: Building the non-free-packages 
-#       command: "/home/{{ username }}/ws/void-packages/xbps-src pkg {{ item }}"
-#       become_user: "{{ username }}"
-#       with_items: "{{ non_free_packages }}"
+    - name: Building the non-free-packages 
+      command: "/home/{{ username }}/ws/void-packages/xbps-src pkg {{ item }}"
+      become_user: "{{ username }}"
+      with_items: "{{ non_free_packages }}"
     
-#     - name: Installing the non-free-packages 
-#       shell: "xbps-install --repository=/home/{{ username }}/ws/void-packages/hostdir/binpkgs/nonfree -y {{ item }}"
-#       with_items: "{{ non_free_packages }}"
+    - name: Installing the non-free-packages 
+      shell: "xbps-install --repository=/home/{{ username }}/ws/void-packages/hostdir/binpkgs/nonfree -y {{ item }}"
+      with_items: "{{ non_free_packages }}"
