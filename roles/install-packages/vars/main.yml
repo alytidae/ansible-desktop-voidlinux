@@ -13,6 +13,7 @@ free_packages:
   - tree
   - neofetch
   - neovim
+  - fuzzel
   - zsh
   - alacritty
   - anki 
