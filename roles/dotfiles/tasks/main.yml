@@ -28,5 +28,5 @@
         dest: "/home/{{ username }}/.zprofile"
         state: link
 
-  when: "{{alytidae_dotfiles_enable | bool}} == true" 
+  when: 'alytidae_dotfiles_enable | bool == true'
 
