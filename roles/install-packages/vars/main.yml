@@ -12,7 +12,7 @@ free_packages:
   - git
   - tree
   - neofetch
-  - neovim
+  - helix 
   - fuzzel
   - zsh
   - alacritty
