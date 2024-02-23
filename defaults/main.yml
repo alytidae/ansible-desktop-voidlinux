@@ -7,5 +7,10 @@ hostname: "void-vm"
 # Change here to a MORE complex password 
 password: "password"
 
+# Type "yes" to download and configure dotfile from 
+# https://github.com/alytidae/dotfiles
+# Type "no" if you're not crazy enough to use my dotfiles
+alytidae_dotfiles_enable: "no"
+
 locale: 
   - "en_US.UTF-8 UTF-8"
