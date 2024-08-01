@@ -27,6 +27,3 @@
         src: "/home/{{ username }}/ws/dotfiles/other/.zprofile"
         dest: "/home/{{ username }}/.zprofile"
         state: link
-
-  when: 'alytidae_dotfiles_enable | bool == true'
-

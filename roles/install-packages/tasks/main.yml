@@ -10,47 +10,6 @@
     state: present
   with_items: "{{ free_packages }}"
 
-# - name: Installing/updating rustup toolchain and cargo packages
-#   block:
-#     - name: Check if rustup is installed
-#       stat:
-#         path: "/home/{{ username }}/ws/.rustup"
-#       register: rustup_folder
-    
-#     - name: Update rustup
-#       shell: "rustup update"
-#       when: rustup_folder.stat.exists
-    
-#     - name: Download Installer
-#       get_url:
-#         url: https://sh.rustup.rs
-#         dest: "/tmp/sh.rustup.rs"
-#         mode: '0755'
-#         force: 'yes'
-#       when: not rustup_folder.stat.exists
-    
-#     - name: Install rustup
-#       shell: "/tmp/sh.rustup.rs -y"
-#       when: not rustup_folder.stat.exists
-    
-#     - name: Specifying the rust version (default stable)
-#       shell: rustup default stable
-#       when: not rustup_folder.stat.exists
-    
-#     - name: Installing cargo packages
-#       community.general.cargo:
-#         name: "{{ item }}"
-#         state: latest
-#       with_items: "{{ cargo_packages }}"
-#   environment:
-#     #I know that maybe this is not the best way to add .cargo/bin to the PATH, but I couldn't figure out how to do it
-#     PATH: "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/home/{{ username }}/ws/.cargo/bin"
-#     # Since I keep mine .cargo and .rustup in the "ws" folder I have to specify this in ansible. I also have exports in dotfiles/zsh/.zshrc
-#     CARGO_HOME:  "/home/{{ username }}/ws/.cargo"
-#     RUSTUP_HOME: "/home/{{ username }}/ws/.rustup"
-#   become: yes
-#   become_user: "{{ username }}"
-
 - name: Installing non-free packages
   block:
     - name: Cloning void-linux/void-packages.git for non-free packages (>700Mb, you need to wait)
