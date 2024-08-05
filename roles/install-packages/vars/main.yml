@@ -5,6 +5,7 @@ free_packages:
   - base-devel
   - fontconfig-devel
   - xtools
+  - wl-clipboard
   # APPS
   - vim
   - htop
@@ -30,7 +31,8 @@ free_packages:
   - pass
   - lazygit 
   - firefox
-  - thunderbird
+  - tailscale
+  - pavucontrol
   # SWAY
   # Troubles:
   # https://www.reddit.com/r/voidlinux/comments/hgm4ig/void_sway_troubleshooting_reminder/
