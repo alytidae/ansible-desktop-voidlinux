@@ -27,7 +27,6 @@ free_packages:
   - wget
   - brightnessctl
   - pipewire
-  - connman
   - pass
   - lazygit 
   - firefox
@@ -48,7 +47,9 @@ free_packages:
   - wayland
   - sway
   - swaylock
+  - swayidle
   - Waybar
+  - iwd
 
 non_free_packages:
   - spotify
