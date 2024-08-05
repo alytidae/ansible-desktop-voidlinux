@@ -24,7 +24,6 @@ free_packages:
   - imv
   - qbittorrent
   - wget
-  - syncthing
   - brightnessctl
   - pipewire
   - connman
