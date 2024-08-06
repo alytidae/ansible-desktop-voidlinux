@@ -41,3 +41,21 @@
       service: 
         name: polkitd
         enabled: yes
+
+- name: Pipewire setup
+  block:
+    - name: Create pipewire.conf.d
+      ansible.builtin.file:
+        path: /etc/pipewire/pipewire.conf.d
+        state: directory
+        mode: '0755'
+    - name: Copy 10-wireplumber.conf
+      ansible.builtin.file:
+        src: /usr/share/examples/wireplumber/10-wireplumber.conf
+        dest: /etc/pipewire/pipewire.conf.d/
+        state: link
+    - name: Copy 20-pipewire-pulse.conf
+      ansible.builtin.file:
+        src: /usr/share/examples/pipewire/20-pipewire-pulse.conf
+        dest: /etc/pipewire/pipewire.conf.d/
+        state: link
