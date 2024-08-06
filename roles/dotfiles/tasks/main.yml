@@ -24,7 +24,7 @@
 
     - name: Link dotfile applications to /usr/share/applications/
       file:
-        src: "/home/{{ username }}/ws/dotfiles/other/applications"
+        src: "/home/{{ username }}/ws/dotfiles/other/applications/*"
         dest: "/usr/share/applications/"
         state: link
 
