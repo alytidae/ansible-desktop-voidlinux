@@ -21,6 +21,13 @@
         src: "/home/{{ username }}/ws/dotfiles/other/fonts"
         dest: "/home/{{ username }}/.local/share/fonts"
         state: link
+
+    - name: Link dotfile applications to /usr/share/applications/
+      file:
+        src: "/home/{{ username }}/ws/dotfiles/other/applications"
+        dest: "/usr/share/applications/"
+        state: link
+
     
     - name: Add .zprofile to home
       file:
