@@ -50,6 +50,8 @@ free_packages:
   - swayidle
   - Waybar
   - iwd
+  - go
+  - cargo
 
 non_free_packages:
   - spotify
