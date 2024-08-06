@@ -28,5 +28,5 @@
         dest: "/home/{{ username }}/.zprofile"
         state: link
         mode: '0644'
-        owner: {{ username }}
-        group: {{ username }}
+        owner: "{{ username }}"
+        group: "{{ username }}"
