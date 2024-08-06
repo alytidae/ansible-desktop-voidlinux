@@ -30,3 +30,10 @@
         mode: '0644'
         owner: "{{ username }}"
         group: "{{ username }}"
+
+    - name: Change dotfiles origin
+      lineinfile:
+        path: /home/igor/ws/dotfiles/.git/config
+        regexp: "url = https://github.com/alytidae/ansible-desktop-voidlinux.git"
+        line: "url = git@github.com:alytidae/dotfiles.git" 
+

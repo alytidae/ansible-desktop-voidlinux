@@ -59,3 +59,36 @@
         src: /usr/share/examples/pipewire/20-pipewire-pulse.conf
         dest: /etc/pipewire/pipewire.conf.d/
         state: link
+
+
+- name: Fixing FN keys bug on Thinkpad E14 g2
+  block:
+    - name: Enable crond
+      service: 
+        name: crond
+        enabled: yes
+
+    - name: Adding task for crond
+      ansible.builtin.cron:
+        name: "a job for reboot"
+        special_time: reboot
+        job: "sudo rtcwake -m mem -s 1"
+
+
+- name: Setting up an Internet connection
+  vars:
+    iwdtext: |
+      [General]
+      EnableNetworkConfiguration=true
+  block:
+    - name: Enable iwd
+      service: 
+        name: iwd
+        enabled: yes
+    - name: EnableNetworkConfiguration=true in /etc/iwd/main.conf
+      copy:
+        block: "{{ iwdtext }}"
+        dest: /etc/iwd/main.conf
+        force: no
+
+
