@@ -27,5 +27,6 @@
         src: "/home/{{ username }}/ws/dotfiles/other/.zprofile"
         dest: "/home/{{ username }}/.zprofile"
         state: link
-        mode: 644
-      become_user: "{{ username }}"
+        mode: '0644'
+        owner: {{ username }}
+        group: {{ username }}
