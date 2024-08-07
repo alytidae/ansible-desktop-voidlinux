@@ -17,11 +17,15 @@ free_packages:
   - fuzzel
   - zsh
   - alacritty
-
   # Anki in xbps is REALLY old. I cant use it :(
   # - anki 
   - telegram-desktop
   - Thunar
+  # for thumbnails of images in thunar
+  - tumbler
+  - gvfs-smb
+  - smbclient
+
   - vscode
   - mpv
   - imv
