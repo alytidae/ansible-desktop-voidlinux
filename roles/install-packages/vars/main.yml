@@ -61,6 +61,7 @@ free_packages:
   - cargo
   - grim
   - slurp
+  - tlp
 
 non_free_packages:
   - spotify
