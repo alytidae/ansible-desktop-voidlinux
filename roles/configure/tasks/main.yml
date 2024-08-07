@@ -52,14 +52,13 @@
     - name: Copy 10-wireplumber.conf
       ansible.builtin.file:
         src: /usr/share/examples/wireplumber/10-wireplumber.conf
-        dest: /etc/pipewire/pipewire.conf.d/
+        dest: /etc/pipewire/pipewire.conf.d/10-wireplumber.conf
         state: link
     - name: Copy 20-pipewire-pulse.conf
       ansible.builtin.file:
         src: /usr/share/examples/pipewire/20-pipewire-pulse.conf
-        dest: /etc/pipewire/pipewire.conf.d/
+        dest: /etc/pipewire/pipewire.conf.d/20-pipewire-pulse.conf
         state: link
-
 
 - name: Fixing FN keys bug on Thinkpad E14 g2
   block:
@@ -87,7 +86,7 @@
         enabled: yes
     - name: EnableNetworkConfiguration=true in /etc/iwd/main.conf
       copy:
-        block: "{{ iwdtext }}"
+        content: "{{ iwdtext }}"
         dest: /etc/iwd/main.conf
         force: no
 

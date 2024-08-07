@@ -22,12 +22,17 @@
         dest: "/home/{{ username }}/.local/share/fonts"
         state: link
 
-    - name: Link dotfile applications to /usr/share/applications/
-      file:
-        src: "/home/{{ username }}/ws/dotfiles/other/applications/*"
-        dest: "/usr/share/applications/"
-        state: link
+    - name: Find all files in ~/commands
+      find:
+        paths: "/home/{{ username }}/ws/dotfiles/other/applications"
+      register: find
 
+    - name: Link Obsidian.desktop applications to /usr/share/applications/
+      file:
+        src: "{{ item.path }}"
+        dest: "/usr/share/applications/{{ item.path | basename }}"
+        state: link
+      with_items: "{{ find.files }}"
     
     - name: Add .zprofile to home
       file:
