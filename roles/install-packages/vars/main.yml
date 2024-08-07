@@ -54,6 +54,7 @@ free_packages:
   - go
   - cargo
   - grim
+  - slurp
 
 non_free_packages:
   - spotify
