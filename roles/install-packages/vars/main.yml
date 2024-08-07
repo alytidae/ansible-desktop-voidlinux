@@ -53,6 +53,7 @@ free_packages:
   - cronie 
   - go
   - cargo
+  - grim
 
 non_free_packages:
   - spotify
