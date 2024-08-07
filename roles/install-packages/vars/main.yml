@@ -17,7 +17,9 @@ free_packages:
   - fuzzel
   - zsh
   - alacritty
-  - anki 
+
+  # Anki in xbps is REALLY old. I cant use it :(
+  # - anki 
   - telegram-desktop
   - Thunar
   - vscode
