@@ -50,6 +50,7 @@ free_packages:
   - swayidle
   - Waybar
   - iwd
+  - cronie 
   - go
   - cargo
 
