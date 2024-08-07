@@ -38,6 +38,13 @@ free_packages:
   - firefox
   - tailscale
   - pavucontrol
+  - iwd
+  - cronie 
+  - go
+  - cargo
+  - grim
+  - slurp
+  - tlp
   # SWAY
   # Troubles:
   # https://www.reddit.com/r/voidlinux/comments/hgm4ig/void_sway_troubleshooting_reminder/
@@ -55,13 +62,10 @@ free_packages:
   - swaylock
   - swayidle
   - Waybar
-  - iwd
-  - cronie 
-  - go
-  - cargo
-  - grim
-  - slurp
-  - tlp
 
-non_free_packages:
+non_free_distrobox_packages:
   - spotify
+  - anki-bin
+  - obsidian
+  - mplayer # anki requires this package for sound
+  - firefox # only for login to spotify
