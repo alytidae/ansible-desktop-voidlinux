@@ -63,6 +63,9 @@ free_packages:
   - swaylock
   - swayidle
   - Waybar
+  - bluez 
+  - blueman 
+  - libspa-bluetooth
 
 non_free_distrobox_packages:
   - spotify
