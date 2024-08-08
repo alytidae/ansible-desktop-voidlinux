@@ -90,4 +90,7 @@
         dest: /etc/iwd/main.conf
         force: no
 
-
+- name: Enable bluetoothd
+  service:
+    name: bluetoothd
+    enabled: yes

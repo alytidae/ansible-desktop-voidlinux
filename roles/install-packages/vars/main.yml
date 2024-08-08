@@ -45,6 +45,7 @@ free_packages:
   - grim
   - slurp
   - tlp
+  - podman
   # SWAY
   # Troubles:
   # https://www.reddit.com/r/voidlinux/comments/hgm4ig/void_sway_troubleshooting_reminder/
@@ -69,3 +70,9 @@ non_free_distrobox_packages:
   - obsidian
   - mplayer # anki requires this package for sound
   - firefox # only for login to spotify
+
+non_free_distrobox_packages_application:
+  - spotify
+  - anki
+  - obsidian
+
