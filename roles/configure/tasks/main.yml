@@ -90,7 +90,22 @@
         dest: /etc/iwd/main.conf
         force: no
 
-- name: Enable bluetoothd
+- name: Bluetooth
+  block:
+    - name: Enable bluetoothd
+      service:
+        name: bluetoothd
+        enabled: yes
+
+    - name: Add user to a group bluetoothd
+      user:
+        name: "{{ username }}"
+        groups: "bluetooth"
+        append: yes
+
+- name: Enable Power Saving - tlp
   service:
-    name: bluetoothd
+    name: tlp
     enabled: yes
+
+
