@@ -10,68 +10,38 @@
     state: present
   with_items: "{{ free_packages }}"
 
-- name: Check if distrobox non-free packages is already installed
-  stat:
-    path: /home/{{ username }}/.local/.distrobox_ansible_completed
-  register: task_done
-
-- name: Installing non-free packages with distrobox
+- name: Installing non-free packages
   block:
-    - name: Creating ~./local/distrobox
-      ansible.builtin.file:
-        path: "/home/{{ username}}/.local/distrobox"
-        state: directory
-        mode: '0755'
-      become_user: "{{ username }}"
-
-    - name: Installing distrobox
-      shell: "curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sh -s -- --prefix /home/{{ username}}/.local/distrobox"      
-      become_user: "{{ username }}"
-
-    - name: Creating a Arch container
-      shell: "./bin/distrobox-create -Y --image quay.io/toolbx/arch-toolbox:latest --name aur"
-      args:
-        chdir: "/home/{{ username}}/.local/distrobox"
-      become_user: "{{ username }}"
-
-    - name: Cloning paru in Arch container for aur
+    - name: Cloning void-linux/void-packages.git for non-free packages (>1.6G, you need to wait)
       git:
-        repo: https://aur.archlinux.org/paru.git
-        dest: "/home/{{ username}}/.local/distrobox/paru"
+        repo: https://github.com/void-linux/void-packages.git
+        dest: "/home/{{ username }}/ws/void-packages"
+        force: yes
+      become: yes
       become_user: "{{ username }}"
-      environment:
-        PODMAN_IGNORE_CGROUPSV1_WARNING: 1
 
-    - name: Installing paru in Arch container
-      command: "../bin/distrobox-enter --name aur -- makepkg -si --noconfirm"
+    - name: Installing the bootstrap packages
+      command: "/home/{{ username }}/ws/void-packages/xbps-src binary-bootstrap"
       become_user: "{{ username }}"
-      args:
-        chdir: "/home/{{ username}}/.local/distrobox/paru"
-      environment:
-        PODMAN_IGNORE_CGROUPSV1_WARNING: 1
 
-    - name: Paru install packages
-      command: "./distrobox-enter --name aur -- paru -Sy --noconfirm {{ item }}"
+    - name: Enabling 'restricted' packages
+      copy:
+        dest: "/home/{{ username }}/ws/void-packages/etc/conf"
+        content: |
+          XBPS_ALLOW_RESTRICTED=yes
       become_user: "{{ username }}"
-      args:
-        chdir: "/home/{{ username}}/.local/distrobox/bin"
-      environment:
-        PODMAN_IGNORE_CGROUPSV1_WARNING: 1
-      with_items: "{{ non_free_distrobox_packages }}"
-        
-    - name: Exporting application from container to use it in fuzzel
-      command: "./distrobox-enter --name aur -- distrobox-export --app {{ item }}"
+
+    - name: Building the non-free-packages 
+      command: "/home/{{ username }}/ws/void-packages/xbps-src pkg {{ item }}"
       become_user: "{{ username }}"
-      args:
-        chdir: "/home/{{ username}}/.local/distrobox/bin"
-      environment:
-        PODMAN_IGNORE_CGROUPSV1_WARNING: 1
-      with_items: "{{ non_free_distrobox_packages_application }}"
+      with_items: "{{ non_free_packages }}"
 
-    - name: Create a file to indicate task completion
-      file:
-        path: /home/{{ username }}/.local/.distrobox_ansible_completed
-        state: touch
-  when: not task_done.stat.exists
+    - name: Installing the non-free-packages 
+      shell: "xbps-install --repository=/home/{{ username }}/ws/void-packages/hostdir/binpkgs/nonfree -y {{ item }}"
+      with_items: "{{ non_free_packages }}"
 
 
+- name: Installing anki
+  block:
+    - name 
+  when: "{{install_anki}}" == "yes"

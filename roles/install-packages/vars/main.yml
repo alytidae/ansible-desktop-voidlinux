@@ -23,7 +23,7 @@ free_packages:
   - tumbler
   - gvfs-smb
   - smbclient
-
+  - zstd
   - vscode
   - mpv
   - imv
@@ -68,15 +68,9 @@ free_packages:
   - noto-fonts-emoji
   - noto-fonts-ttf
 
-non_free_distrobox_packages:
-  - spotify
-  - anki-bin
-  - obsidian
-  - mplayer # anki requires this package for sound
-  - firefox # only for login to spotify
+# I tried distrobox, flatpack and mix.
+# Ill stay with mix.
 
-non_free_distrobox_packages_application:
+# Only from here https://github.com/void-linux/void-packages
+non_free_packages:
   - spotify
-  - anki
-  - obsidian
-
