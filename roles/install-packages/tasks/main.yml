@@ -39,9 +39,3 @@
     - name: Installing the non-free-packages 
       shell: "xbps-install --repository=/home/{{ username }}/ws/void-packages/hostdir/binpkgs/nonfree -y {{ item }}"
       with_items: "{{ non_free_packages }}"
-
-
-- name: Installing anki
-  block:
-    - name 
-  when: "{{install_anki}}" == "yes"
