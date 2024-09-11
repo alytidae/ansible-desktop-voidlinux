@@ -17,8 +17,6 @@ free_packages:
   - fuzzel
   - zsh
   - alacritty
-  # Anki in xbps is REALLY old. I cant use it :(
-  # - anki 
   - telegram-desktop
   - Thunar
   # for thumbnails of images in thunar
@@ -66,6 +64,9 @@ free_packages:
   - bluez 
   - blueman 
   - libspa-bluetooth
+  - noto-fonts-cjk
+  - noto-fonts-emoji
+  - noto-fonts-ttf
 
 non_free_distrobox_packages:
   - spotify
