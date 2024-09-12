@@ -74,3 +74,5 @@ free_packages:
 # Only from here https://github.com/void-linux/void-packages
 non_free_packages:
   - spotify
+
+# Anki and obsidian i will install manually
