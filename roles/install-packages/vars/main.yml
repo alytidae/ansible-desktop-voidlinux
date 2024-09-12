@@ -27,6 +27,7 @@ free_packages:
   - vscode
   - mpv
   - imv
+  - shotwell
   - qbittorrent
   - wget
   - brightnessctl
