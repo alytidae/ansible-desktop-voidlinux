@@ -17,6 +17,7 @@ free_packages:
   - fuzzel
   - zsh
   - alacritty
+  - udiskie
   - telegram-desktop
   - Thunar
   # for thumbnails of images in thunar
